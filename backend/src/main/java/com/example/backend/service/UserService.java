@@ -1,5 +1,14 @@
 package com.example.backend.service;
 
+import java.io.IOException;
+import java.security.GeneralSecurityException;
+import java.util.Collections;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
+
 import com.example.backend.dto.AuthResponse;
 import com.example.backend.dto.LoginRequest;
 import com.example.backend.dto.RegisterRequest;
@@ -9,16 +18,7 @@ import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken;
 import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken.Payload;
 import com.google.api.client.googleapis.auth.oauth2.GoogleIdTokenVerifier;
 import com.google.api.client.googleapis.javanet.GoogleNetHttpTransport;
-import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.json.jackson2.JacksonFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Service;
-
-import java.io.IOException;
-import java.security.GeneralSecurityException;
-import java.util.Collections;
-import java.util.Map;
 
 @Service
 public class UserService {
@@ -73,7 +73,7 @@ public class UserService {
                     GoogleNetHttpTransport.newTrustedTransport(),
                     JacksonFactory.getDefaultInstance()
             )
-            .setAudience(Collections.singletonList("661135922934-bq9m34un9dn036j3jtjunvejlitd4ide.apps.googleusercontent.com"))
+            .setAudience(Collections.singletonList("579254201038-ajdca8j9197r0oba26l2gf48872pt3lq.apps.googleusercontent.com"))
             .build();
 
             GoogleIdToken idToken = verifier.verify(idTokenString);

@@ -18,19 +18,13 @@ spring:
 
   devtools:
     restart:
-      enabled: false
+      enabled: true
     livereload:
       enabled: true
-
-  profiles:
-    active: dev    
 
   application:
     name: backend
 
   data:
     mongodb:
-      uri: mongodb+srv://Imagify:Imagify1234@imagify.x5n1nxl.mongodb.net/imagify
-
-  server:
-    port: 8085
+      uri: mongodb+srv://Imagify:Imagify1234@imagify.x5n1nxl.mongodb.net/Imagify
