@@ -1,29 +1,21 @@
-package com.example.backend.model;
+package com.example.backend.dto;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
-
-@Document(collection = "posts")
-public class Post {
-
-    @Id
+public class PostDTO {
     private String id;
     private String caption;
     private String images;
     private boolean isPublic;
     private String userEmail;
-
-    public Post() {}
-
-    public Post(String caption, String images, boolean isPublic, String userEmail) {
-        this.caption = caption;
-        this.images = images;
-        this.isPublic = isPublic;
-        this.userEmail = userEmail;
-    }
+    private String username;
 
     public String getId() { return id; }
     public void setId(String id) { this.id = id; }
+
+    public String getUserEmail() { return userEmail; }
+    public void setUserEmail(String userEmail) { this.userEmail = userEmail; }
+
+    public String getUsername() { return username; }
+    public void setUsername(String username) { this.username = username; }
 
     public String getCaption() { return caption; }
     public void setCaption(String caption) { this.caption = caption; }
@@ -33,8 +25,4 @@ public class Post {
 
     public boolean getIsPublic() { return isPublic; }
     public void setIsPublic(boolean isPublic) { this.isPublic = isPublic; }
-
-    public String getUserEmail() { return userEmail; }
-    public void setUserEmail(String userEmail) { this.userEmail = userEmail; }
-
 }
