@@ -35,12 +35,24 @@ public class PostController {
         return postService.getPostsByUserEmail(userEmail);
     }
 
+    // Get all posts
+    @GetMapping
+    public List<PostDTO> getAllPosts() {
+        return postService.getAllPosts();
+    }
+
     // Create a post for the logged-in user
     @PostMapping
     public Post createPost(@RequestBody PostDTO dto) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String userEmail = authentication.getName();
         dto.setUserEmail(userEmail);
+
+        // Validate the image URLs before saving
+        if (dto.getImages() == null || dto.getImages().isEmpty()) {
+            throw new IllegalArgumentException("At least one image URL is required.");
+        }
+
         return postService.createPost(dto);
     }
 
@@ -49,11 +61,11 @@ public class PostController {
     public ResponseEntity<Post> updatePost(@PathVariable String id, @RequestBody PostDTO dto) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String userEmail = authentication.getName();
-        
+
         if (!postService.isPostOwnedByUser(id, userEmail)) {
             return ResponseEntity.status(403).build();
         }
-        
+
         Post updatedPost = postService.updatePost(id, dto);
         return ResponseEntity.ok(updatedPost);
     }
@@ -63,11 +75,11 @@ public class PostController {
     public ResponseEntity<Void> deletePost(@PathVariable String id) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String userEmail = authentication.getName();
-        
+
         if (!postService.isPostOwnedByUser(id, userEmail)) {
             return ResponseEntity.status(403).build();
         }
-        
+
         postService.deletePost(id);
         return ResponseEntity.noContent().build();
     }

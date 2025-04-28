@@ -21,7 +21,7 @@ const Navbar = () => {
             <Link to="/">
               <Home className="w-6 h-6 text-gray-900 hover:text-orange-500" />
             </Link>
-            <Link to="/create">
+            <Link to="/create-post">
               <PlusSquare className="w-6 h-6 text-gray-900 hover:text-orange-500" />
             </Link>
             <Link to="/profile">

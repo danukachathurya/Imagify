@@ -1,5 +1,7 @@
 package com.example.backend.model;
 
+import java.util.List;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -9,13 +11,13 @@ public class Post {
     @Id
     private String id;
     private String caption;
-    private String images;
+    private List<String> images;
     private boolean isPublic;
     private String userEmail;
 
     public Post() {}
 
-    public Post(String caption, String images, boolean isPublic, String userEmail) {
+    public Post(String caption, List<String> images, boolean isPublic, String userEmail) {
         this.caption = caption;
         this.images = images;
         this.isPublic = isPublic;
@@ -28,8 +30,8 @@ public class Post {
     public String getCaption() { return caption; }
     public void setCaption(String caption) { this.caption = caption; }
 
-    public String getImages() { return images; }
-    public void setImages(String images) { this.images = images; }
+    public List<String> getImages() { return images; }
+    public void setImages(List<String> images) { this.images = images; }
 
     public boolean getIsPublic() { return isPublic; }
     public void setIsPublic(boolean isPublic) { this.isPublic = isPublic; }

@@ -16,6 +16,7 @@ import {
 import { onAuthStateChanged } from "firebase/auth";
 
 import "./index.css";
+import Post from "./components/Post";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -61,6 +62,7 @@ function App() {
         />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/create-post" element={<Post />} />
       </Routes>
     </Router>
   );
