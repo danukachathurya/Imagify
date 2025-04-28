@@ -64,11 +64,22 @@ public class PostService {
         }).collect(Collectors.toList());
     }
 
+    // Get all post
+    public List<PostDTO> getAllPosts() {
+        List<Post> posts = postRepository.findAll();
+        return posts.stream()
+                .map(this::convertToDTO)
+                .collect(Collectors.toList());
+    }
+    
+
     // Create a post for the logged-in user
     public Post createPost(PostDTO dto) {
         if (dto.getUserEmail() == null || dto.getUserEmail().isEmpty()) {
             throw new IllegalArgumentException("User email is required to create a post.");
         }
+
+        System.out.println("Images being saved: " + dto.getImages());
 
         Post post = new Post();
         post.setUserEmail(dto.getUserEmail());
@@ -134,5 +145,20 @@ public class PostService {
 
     public boolean isPostOwnedByUser(String postId, String userEmail) {
         return postRepository.existsByIdAndUserEmail(postId, userEmail);
+    }
+
+    // Convert Post -> PostDTO
+    private PostDTO convertToDTO(Post post) {
+        User user = userRepository.findByEmail(post.getUserEmail()).orElse(null);
+        String username = (user != null) ? user.getUsername() : "Unknown";
+
+        PostDTO postDTO = new PostDTO();
+        postDTO.setId(post.getId());
+        postDTO.setUserEmail(post.getUserEmail());
+        postDTO.setCaption(post.getCaption());
+        postDTO.setImages(post.getImages());
+        postDTO.setIsPublic(post.getIsPublic());
+        postDTO.setUsername(username);
+        return postDTO;
     }
 }
